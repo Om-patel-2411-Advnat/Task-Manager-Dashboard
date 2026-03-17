@@ -2,31 +2,36 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
-import ProjectDetails from "./component/ProjectDetails";
-import SideBar from "./component/SideBar";
-import Projects from "./component/Projects";
+import Dashboard from "./Pages/DashBoard";
+import NewProject from "./Pages/NewProject";
+import NewTask from "./Pages/NewTask";
 
 function App() {
 
   const router = createBrowserRouter([
     {
-      path: '/',
-      element: <HomePage />,
-      children: [
+      path: '/login',
+      element: <LoginPage />,
+    },
+    {
+      path: '/home',
+      element:<HomePage />,
+      children : [
         {
-          path: 'projects',
-          element: <Projects />,
+          index : true ,
+          element: <Dashboard />
         },
         {
-          path: 'projects/:id',
-          element: <ProjectDetails />
+          path: 'new-project',
+          element: <NewProject />
+        },
+        {
+          path: 'new-task',
+          element: <NewTask />
         }
       ]
     },
-    {
-      path: '/login',
-      element: <LoginPage />
-    }
+    
   ])
 
   return (

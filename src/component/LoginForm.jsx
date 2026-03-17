@@ -1,4 +1,4 @@
-export default function LoginForm({HandleSubmit}){
+export default function LoginForm({HandleSubmit , error}){
     return(
         <div className="flex justify-center items-center h-screen bg-slate-100">
             <form
@@ -9,6 +9,7 @@ export default function LoginForm({HandleSubmit}){
                 <input type="text" name="email" className="bg-slate-200 h-10 w-full rounded-lg outline-none text-lg px-2" required/>
                 <label htmlFor="password" className="text-slate-700">Password</label>
                 <input type="password" name="password" className="bg-slate-200 h-10 w-full rounded-lg outline-none text-lg px-2" required/>
+                {error && <p className="text-red-500 text-sm">{error}</p>}
                 <div className="flex m-auto">
                     <button className="bg-blue-600 hover:bg-blue-700 text-white h-8 w-20 rounded-lg">Login</button>
                 </div>
