@@ -15,7 +15,7 @@ export default function LoginPage(){
     const isAuth = useSelector(state => state.auth.isAuthenticated);
 
     if (isAuth) {
-        return <Navigate to='/home' />
+        return <Navigate to='/' />
     }
 
     function HandleSubmit(event){
@@ -26,7 +26,7 @@ export default function LoginPage(){
 
         if (data.email === userData.email && data.password === userData.password ){
             dispatch(authActions.logIn());
-            navigate('/home');
+            navigate('/');
         }else{
             setError("invalid credentials");
         }        

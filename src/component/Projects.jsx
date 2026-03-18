@@ -1,29 +1,65 @@
-import { useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { NavLink, useNavigate } from "react-router-dom"
 
-// const DUMMY_PROJECTS = [
-//     { id: 'p-1' , project_title : "first" , description : "this is my first project" , tasks : [
-//         { id: 't-1', title : 'task-1' , description : 'this is task number 1'},
-//         { id: 't-2', title : 'task-2' , description : 'this is task number 2'},
-//     ]},
-//     { id: 'p-2' , project_title: "second", description: "this is my second project", tasks : [
-//         { id: 't-3', title: 'task-3', description: 'this is task number 3' },
-//         { id: 't-4', title: 'task-4', description: 'this is task number 4' },
-//     ] },
-//     {id: 'p-3', project_title: "third", description: "this is my third project" , tasks:[
-//         { id: 't-5', title: 'task-5', description: 'this is task number 5' },
-//         { id: 't-6', title: 'task-6', description: 'this is task number 6' },
-//     ]},
-// ]
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { projectActions } from "../store/ProjectSlice";
 
 export default function Projects(){
 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const projects = useSelector(state => state.projects.projects);
 
+    function HandleRemoveProject(id , e){
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        dispatch(projectActions.removeProject(id));
+        
+        console.log(projects);
+    }
+    function HandleEditProject(e , id){
+        e.preventDefault();
+
+        navigate('/new-project' , {
+            state : { project : projects.find(project => project.project_id === id )}
+        })
+
+        dispatch(projectActions.editProject({
+            project_id : id ,
+        }));
+    }
+
     return (
-        <div className="flex flex-col mt-2 mx-2 text-md">
+        <div className="flex flex-col mt-2 mx-2 text-md gap-1">
             {projects.map(project =>(
-                <Link to={project.id} key={project.id} className="h-10 hover:bg-stone-200 rounded-md mx-3 text-stone-700 flex items-center pl-3">{project.project_name}</Link>
+                <NavLink 
+                    to={`${project.project_id}`} 
+                    key={project.project_id} 
+                    className={({isActive}) =>
+                        `group h-10  rounded-md mx-3 text-stone-700 flex items-center pl-3 ${isActive ? 'bg-stone-200' : 'hover:bg-stone-200' }`
+                    }
+                >
+                    <span>
+                        {project.project_name}
+                    </span>
+                    <div className="ml-auto pr-2 flex gap-2 text-stone-500 opacity-0 group-hover:opacity-100 transition ">
+                        <button
+                            onClick={(e) => HandleEditProject(e, project.project_id)}
+                            className="hover:text-stone-700"
+                        >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                        </button>
+                        <button
+                            onClick={(e) => HandleRemoveProject(project.project_id , e)}
+                            className="hover:text-stone-700"
+                        >   
+                            <FontAwesomeIcon icon={faTrashCan} />
+                        </button>
+                    </div>
+                </NavLink>
             ))}
         </div>
     )

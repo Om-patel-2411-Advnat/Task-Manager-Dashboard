@@ -25,7 +25,7 @@ export default function SideBar(){
             <div className="w-full">
                 <p className="w-full mt-5 ml-3 text-sm text-stone-600">Menu</p>
                 <ul className=" w-full text-md">
-                    <Link to='/home' className="h-10 hover:bg-stone-200 rounded-md mx-3 text-stone-700 flex items-center pl-3">Dashboard</Link>
+                    <Link to='/' className="h-10 hover:bg-stone-200 rounded-md mx-3 text-stone-700 flex items-center pl-3">Dashboard</Link>
                     <li className="h-10 hover:bg-stone-200 rounded-md mx-3 text-stone-700 flex items-center pl-3">All Tasks</li>
                 </ul>
             </div>

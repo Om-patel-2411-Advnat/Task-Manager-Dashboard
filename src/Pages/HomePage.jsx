@@ -8,8 +8,6 @@ export default function HomePage() {
 
     const isAuth = useSelector(state => state.auth.isAuthenticated);
 
-    console.log(isAuth);
-
     if(!isAuth){
         return <Navigate to='/login' />
     }

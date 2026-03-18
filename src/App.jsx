@@ -5,6 +5,7 @@ import HomePage from "./Pages/HomePage";
 import Dashboard from "./Pages/DashBoard";
 import NewProject from "./Pages/NewProject";
 import NewTask from "./Pages/NewTask";
+import ProjectDetails from "./Pages/ProjectDetails";
 
 function App() {
 
@@ -14,24 +15,30 @@ function App() {
       element: <LoginPage />,
     },
     {
-      path: '/home',
-      element:<HomePage />,
-      children : [
+      path: '/',
+      element: <HomePage />,
+      children: [
         {
-          index : true ,
+          index: true,
           element: <Dashboard />
+        },
+        {
+          path: ':project_id',
+          element: <ProjectDetails />,
+          children : [
+            {
+              path: 'new-task',
+              element: <NewTask />
+            },
+          ]
         },
         {
           path: 'new-project',
           element: <NewProject />
         },
-        {
-          path: 'new-task',
-          element: <NewTask />
-        }
       ]
     },
-    
+
   ])
 
   return (
