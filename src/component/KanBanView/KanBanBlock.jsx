@@ -1,0 +1,24 @@
+import { useDroppable } from '@dnd-kit/core'
+
+import TaskBlock from "./TaskBlock";
+
+export default function KanBanBlock({StatusTasks , status , text }){
+
+    const { setNodeRef , isOver } = useDroppable({
+        id: status ,
+    })
+
+    return(
+        <div className='bg-white rounded-lg shadow-md border-1 border-gray-300 '>
+            <p className="h-10 bg-slate-200 flex justify-center items-center border-b-1 border-gray-300 rounded-t-lg text-stone-800">{text}</p>
+            <div 
+                ref={setNodeRef}
+                className={`h-full w-full p-3 overflow-auto flex flex-col gap-3 ${isOver ? "bg-gray-200" : '' }`}
+            >
+                {StatusTasks.map(task => (
+                    <TaskBlock key={task.task_id} task={task} status={status} text={text}/>
+                ))}
+            </div>
+        </div>
+    )
+}

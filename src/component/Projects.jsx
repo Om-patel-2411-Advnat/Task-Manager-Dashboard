@@ -26,10 +26,6 @@ export default function Projects(){
         navigate('/new-project' , {
             state : { project : projects.find(project => project.project_id === id )}
         })
-
-        dispatch(projectActions.editProject({
-            project_id : id ,
-        }));
     }
 
     return (

@@ -1,4 +1,4 @@
-export default function TaskForm({ onCreateNewTask, HandleClose }){
+export default function TaskForm({ onCreateNewTask, HandleClose , task }){
     return(
         <>
             <p className="h-10 w-full flex justify-center items-center text-xl font-semibold text-stone-700 rounded-lg mb-5 mt-5">Create New Task</p>
@@ -12,6 +12,7 @@ export default function TaskForm({ onCreateNewTask, HandleClose }){
                         type='text'
                         name='title'
                         required
+                        defaultValue={task?.title || '' }
                         className="h-10 w-full rounded-md px-2 task-md outline-none border-1 border-gray-300"
                     />
                 </div>
@@ -20,6 +21,7 @@ export default function TaskForm({ onCreateNewTask, HandleClose }){
                     <textarea
                         name="description"
                         required
+                        defaultValue={task?.description || ''}
                         className="overflow-auto w-full outline-none text-md px-2 h-20 rounded-md border-1 border-gray-300"
                     />
                 </div>
@@ -29,22 +31,33 @@ export default function TaskForm({ onCreateNewTask, HandleClose }){
                         type="date"
                         name="dueDate"
                         required
+                        defaultValue={task?.dueDate || ''}
                         className="h-8 w-50 rounded-sm px-3 border-1 border-gray-300 text-stone-700 task-md"
                     />
                 </div>
                 <div className="flex justify-around">
                     <div className="h-10 w-40 border-1 border-gray-300 flex justify-center items-center rounded-md pr-2">
-                        <select name="priority" required className="h-full w-full outline-none text-center text-stone-700 task-md">
-                            <option defaultValue='low'>Low</option>
+                        <select 
+                            name="priority" 
+                            required 
+                            defaultValue={task?.priority || "low" }
+                            className="h-full w-full outline-none text-center text-stone-700 task-md"
+                        >
+                            <option value='Low'>Low</option>
                             <option value='high'>High</option>
                             <option value='medium'>Medium</option>
                         </select>
                     </div>
                     <div className="h-10 w-40 border-1 border-gray-300 flex justify-center items-center rounded-md pr-2">
-                        <select name="status" required className="h-full w-full outline-none text-center text-stone-700 task-md">
-                            <option defaultValue='toDo'>To do</option>
+                        <select 
+                            name="status" 
+                            required 
+                            defaultValue={task?.status || 'toDo'}
+                            className="h-full w-full outline-none text-center text-stone-700 task-md"
+                        >
+                            <option value='toDo'>To do</option>
                             <option value='InProgress'>In Progress</option>
-                            <option value='complete'>completed</option>
+                            <option value='completed'>completed</option>
                         </select>
                     </div>
                 </div>

@@ -17,29 +17,51 @@ const ProjectSlice = createSlice({
             localStorage.setItem("projects", JSON.stringify(state.projects));
         },
         editProject(state , action){
-            const index = state.projects.findIndex(project => project.project_id === action.payload.project_id);
+            const project = state.projects.find(project => project.project_id === action.payload.project_id);
             
-            if (index === -1) return;
+            if (!project) return;
 
-            state.projects[index].project_name = action.payload.project_name;
-            state.projects[index].description = action.payload.description;
+            project.project_name = action.payload.project_name;
+            project.description = action.payload.description;
 
             localStorage.setItem("projects" , JSON.stringify(state.projects));
         },
         addTask(state , action){
-            const index = state.projects.findIndex(project => project.project_id === action.payload.project_id);
+            const ProjectData = state.projects.find(project => project.project_id === action.payload.project_id);
 
-            if (index === -1) return;
-            
-            const ProjectData = JSON.parse(JSON.stringify(state.projects[index]));
-            const tasks =  ProjectData.tasks;
+            if (!ProjectData) return;
 
             if(action.payload.task){
-                tasks.push(action.payload.task);
+                ProjectData.tasks.push(action.payload.task);
             }
-            state.projects[index] = ProjectData;
+            localStorage.setItem("projects" , JSON.stringify(state.projects));  
+        },
+        RemoveTask(state , action){
+            const project = state.projects.find(project => project.project_id === Number(action.payload.task.project_id));
 
-            localStorage.setItem("projects" , JSON.stringify(state.projects));
+            if(!project) return ;
+
+            project.tasks = project.tasks.filter(task => task.task_id !== action.payload.task.task_id )
+
+            localStorage.setItem("projects", JSON.stringify(state.projects));
+        },
+        EditTask(state , action){
+            const project = state.projects.find(project => project.project_id === Number(action.payload.updatedTask.project_id))
+
+            if(!project) return ;
+
+            const task = project.tasks.find(task => task.task_id === action.payload.updatedTask.task_id);
+
+            if(!task) return ;
+            
+            task.title = action.payload.updatedTask.title;
+            task.description = action.payload.updatedTask.description;
+            task.priority = action.payload.updatedTask.priority;
+            task.status = action.payload.updatedTask.status;
+            task.dueDate = action.payload.updatedTask.dueDate;
+
+            localStorage.setItem("projects", JSON.stringify(state.projects));
+            
         }
     }
 })
