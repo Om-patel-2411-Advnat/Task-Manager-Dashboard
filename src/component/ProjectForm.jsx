@@ -1,7 +1,4 @@
 export default function ProjectForm({ HandleSubmit, HandleClose, project }){
-
-
-
     return(
         <>
             <p className="h-10 w-full flex justify-center items-center text-xl font-semibold text-stone-700 rounded-lg mb-5 mt-5 text-shadow-md">Create New Project</p>

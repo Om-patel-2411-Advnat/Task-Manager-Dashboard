@@ -57,7 +57,7 @@ export default function TaskForm({ onCreateNewTask, HandleClose , task }){
                         >
                             <option value='toDo'>To do</option>
                             <option value='InProgress'>In Progress</option>
-                            <option value='completed'>completed</option>
+                            <option value='Completed'>completed</option>
                         </select>
                     </div>
                 </div>

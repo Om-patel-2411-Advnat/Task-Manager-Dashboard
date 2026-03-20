@@ -1,4 +1,5 @@
-import { useDroppable } from '@dnd-kit/core'
+import { useDroppable } from '@dnd-kit/core';
+import { SortableContext , verticalListSortingStrategy } from '@dnd-kit/sortable';
 
 import TaskBlock from "./TaskBlock";
 
@@ -15,9 +16,18 @@ export default function KanBanBlock({StatusTasks , status , text }){
                 ref={setNodeRef}
                 className={`h-full w-full p-3 overflow-auto flex flex-col gap-3 ${isOver ? "bg-gray-200" : '' }`}
             >
-                {StatusTasks.map(task => (
-                    <TaskBlock key={task.task_id} task={task} status={status} text={text}/>
-                ))}
+                <SortableContext 
+                    items={StatusTasks.map(task =>task.task_id)}
+                    strategy={verticalListSortingStrategy}
+                >
+                    {StatusTasks.length === 0 ? 
+                        <p className='flex justify-center items-center text-stone-800'>No Task is available </p>
+                        :
+                        (StatusTasks.map(task => (
+                            <TaskBlock key={task.task_id} task={task} status={status} text={text}/>
+                        )))
+                    }
+                </SortableContext>
             </div>
         </div>
     )

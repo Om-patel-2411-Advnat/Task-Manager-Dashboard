@@ -19,7 +19,7 @@ export default function Modal({children , path}){
         <dialog 
             open 
             onClick={HandleOutsideClick}
-            className="h-full w-full flex justify-center items-center bg-black/50 z-50"
+            className="h-full w-full flex justify-center items-center bg-black/50 z-500"
         >
             {children}
         </dialog>

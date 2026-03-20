@@ -6,7 +6,8 @@ import KanBan from "../component/KanBanView/KanBan";
 export default function Dashboard() {
 
     const isAuth = useSelector(state => state.auth.isAuthenticated);
-    const allTasks = useSelector(state => state.projects.projects.flatMap(project => project.tasks));
+    const projects = useSelector(state => state.projects.projects );
+    const allTasks = projects.flatMap(project => project.tasks);
     const view = useSelector(state => state.view.view);
 
     if (!isAuth) {

@@ -1,22 +1,20 @@
-import { DndContext, DragOverlay , closestCenter } from "@dnd-kit/core";
+import { DndContext, DragOverlay, closestCenter } from "@dnd-kit/core";
 import { useDispatch } from "react-redux";
 import { projectActions } from "../../store/ProjectSlice";
 
 import KanBanBlock from "./KanBanBlock";
 import TaskBlock from "./TaskBlock";
 import { useState } from "react";
+import FilterSortButton from "../../utils/FilterSortButtons";
+import useTasks from "../hooks/useTasks";
 
-export default function KanBan({tasks}){
-
-    console.log(tasks);
+export default function KanBan({ tasks }) {
 
     const [activeTask, setActiveTask] = useState(null);
 
-    const ToDoTask = tasks.filter(task => task.status === 'toDo');
-    const ProgressTask = tasks.filter(task => task.status === 'InProgress');
-    const CompletedTask = tasks.filter(task => task.status === 'complete');
-    const dispatch = useDispatch();
+    const {ToDoTask , ProgressTask ,CompletedTask} = useTasks(tasks);
 
+    const dispatch = useDispatch();
 
     function handleDragStart(event) {
         const taskId = event.active.id;
@@ -27,40 +25,36 @@ export default function KanBan({tasks}){
 
     function handleDragEnd(event) {
         const { active, over } = event;
-
         if (!over) {
             setActiveTask(null);
             return;
         }
+        const overID = over.id;
 
-        dispatch(projectActions.EditTask({
-            updatedTask: {
+        const overTask = tasks.find(task => task.task_id === overID);
+
+        if (overTask) {
+            dispatch(projectActions.ReOrder({
+                activeID: active.id,
+                overID
+            }))
+        } else {
+            dispatch(projectActions.MoveTask({
                 task_id: active.id,
                 status: over.id
-            }
-        }));
+            }));
+        }
 
         setActiveTask(null);
     }
 
-    return(
-        <div className="w-full h-auto shadow-lg flex flex-col bg-white rounded-xl p-3">
+    return (
+        <div className="w-full h-full shadow-lg flex flex-col bg-white rounded-xl p-3">
             <div className="h-15 p-5 flex justify-between items-center">
                 <p className="text-xl font-semibold text-stone-700">Recent Tasks</p>
-                <div className="flex flex-row gap-5 mr-2">
-                    <select className="h-10 text-lg border-1 border-gray-300 outline-none px-4 rounded-sm text-stone-800">
-                        <option defaultValue="filter">Filter</option>
-                        <option value="priority">Priority</option>
-                        <option value="status">status</option>
-                    </select>
-                    <select className="h-10 text-lg border-1 border-gray-300 outline-none px-4 rounded-sm text-stone-800">
-                        <option defaultValue="sort">Sort</option>
-                        <option value="status">priority</option>
-                        <option value="due-Date">Due Date</option>
-                    </select>
-                </div>
+                <FilterSortButton />
             </div>
-            <DndContext 
+            <DndContext
                 collisionDetection={closestCenter}
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
@@ -71,7 +65,7 @@ export default function KanBan({tasks}){
                     <KanBanBlock StatusTasks={CompletedTask} status="Completed" text="Completed" />
                 </div>
                 <DragOverlay>
-                    {activeTask ? <TaskBlock task={activeTask}/> : null}
+                    {activeTask ? <TaskBlock task={activeTask} status={activeTask.status} text={activeTask.status} /> : null}
                 </DragOverlay>
             </DndContext>
         </div>

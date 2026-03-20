@@ -1,4 +1,5 @@
-import { useDraggable } from "@dnd-kit/core";
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical, faTrashCan, faPenToSquare } from "@fortawesome/free-solid-svg-icons";
@@ -12,19 +13,14 @@ import { useNavigate, useParams } from "react-router-dom";
 
 export default function TaskBlock({task , status , text}){
 
-    const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    const { attributes , listeners , setNodeRef , transform , transition } = useSortable({
         id: task.task_id, 
-        activationConstraint: {
-            delay : 150 ,
-            distance: 8,
-        },
-    });
+    })
 
     const style = {
-        transform: transform
-            ? `translate(${transform.x}px, ${transform.y}px)`
-            : undefined,
-    };
+        transform : CSS.Transform.toString(transform),
+        transition ,
+    }
 
     const [ IsOpen , setIsOpen ] = useState(false);
     const dispatch = useDispatch();
@@ -49,30 +45,43 @@ export default function TaskBlock({task , status , text}){
         dispatch(projectActions.RemoveTask({task}));
     }
 
+    const dueDate = new Date(task.dueDate).setHours(0,0,0,0);
+    const todayDate = new Date().setHours(0,0,0,0);
+
+    const isOverDue = dueDate < todayDate ;
+
+    const formattedDate = new Date(task.dueDate).toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+    });
+
     return (
         <div 
             ref={setNodeRef}
-            {...listeners}
             {...attributes}
             style={style}
-            className="w-full rounded-lg shadow-md border-1 bg-white border-gray-300 flex flex-col justify-between p-3 z-50"
+            className="w-full rounded-lg shadow-md border-1 bg-white border-gray-300 flex flex-col justify-between p-3"
         >
             <div className="flex flex-col gap-2">
                 <div className="flex justify-between">
-                    <p className="text-lg font-semibold text-stone-700">
+                    <p 
+                        {...listeners}
+                        className="text-lg font-semibold text-stone-700"
+                    >
                         {task.title}
                     </p>
                     <div className="relative">
                         <p 
                             onClick={(e) => {
-                                e.stopPropagation(); 
+                                e.stopPropagation();
                                 setIsOpen(!IsOpen);
                             }}
                             className="text-stone-700"
                         >
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </p>
-                        {IsOpen && <div className="absolute right-0 bg-white text-stone-800 flex border-1 border-gray-300 rounded-md z-10">
+                        {IsOpen && <div className="absolute right-0 bg-white text-stone-800 flex border-1 border-gray-300 rounded-md">
                             <button 
                                 onClick={(e) => {
                                     e.stopPropagation();
@@ -97,12 +106,8 @@ export default function TaskBlock({task , status , text}){
                 <StatusBlock status={status} text={text}/>
             </div>
             <div className="flex justify-between items-center mt-2">
-                <p className="text-stone-500 text-md">
-                    {new Date(task.dueDate).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                    })}
+                <p className={` text-md ${isOverDue ? 'text-rose-400' : 'text-stone-500' }`}>
+                    { formattedDate }      
                 </p>
                 <PriorityBlock priority={task.priority}/>
             </div>

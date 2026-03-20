@@ -1,3 +1,4 @@
+import { arrayMove } from "@dnd-kit/sortable";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -62,6 +63,37 @@ const ProjectSlice = createSlice({
 
             localStorage.setItem("projects", JSON.stringify(state.projects));
             
+        },
+        MoveTask(state , action){
+            const {task_id , status} = action.payload ;
+
+            state.projects.forEach(project => {
+                const task = project.tasks.find(task => task.task_id === task_id);
+
+                if(task){
+                    task.status = status ;
+                }
+            });
+
+            localStorage.setItem("projects" , JSON.stringify(state.projects));
+        },
+        ReOrder(state , action){
+            const {activeID , overID } = action.payload;
+
+            const project = state.projects.find(project => project.tasks.some(task => task.task_id === activeID));
+
+            if(!project) return ;
+
+            const tasks = project.tasks;
+
+            const oldIndex = tasks.findIndex(task => task.task_id === activeID);
+            const newIndex = tasks.findIndex(task => task.task_id === overID);
+
+            if(oldIndex === -1 || newIndex === -1) return;
+
+            project.tasks = arrayMove(tasks , oldIndex , newIndex)
+
+            localStorage.setItem("projects" , JSON.stringify(state.projects));
         }
     }
 })
