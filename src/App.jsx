@@ -6,8 +6,20 @@ import Dashboard from "./Pages/DashBoard";
 import NewProject from "./Pages/NewProject";
 import NewTask from "./Pages/NewTask";
 import ProjectDetails from "./Pages/ProjectDetails";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 function App() {
+
+  const Theme = useSelector(state => state.view.Theme);
+
+  useEffect(() => {
+    if (Theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [Theme]);
 
   const router = createBrowserRouter([
     {

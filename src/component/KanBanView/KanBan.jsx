@@ -49,9 +49,9 @@ export default function KanBan({ tasks }) {
     }
 
     return (
-        <div className="w-full h-full shadow-lg flex flex-col bg-white rounded-xl p-3">
+        <div className="w-full h-full shadow-lg flex flex-col bg-white dark:bg-[#1f1f1f] dark:border dark:border-[#3a3a3a] dark:shadow-black/30 rounded-xl p-3 overflow-y-hidden">
             <div className="h-15 p-5 flex justify-between items-center">
-                <p className="text-xl font-semibold text-stone-700">Recent Tasks</p>
+                <p className="text-xl font-semibold text-stone-700 dark:text-[#e5e5e5]">Recent Tasks</p>
                 <FilterSortButton />
             </div>
             <DndContext
@@ -59,7 +59,7 @@ export default function KanBan({ tasks }) {
                 onDragStart={handleDragStart}
                 onDragEnd={handleDragEnd}
             >
-                <div className="h-full w-full grid grid-cols-3 gap-3">
+                <div className="h-full w-full lg:grid lg:grid-cols-3 flex overflow-x-auto gap-3">
                     <KanBanBlock StatusTasks={ToDoTask} status="toDo" text="To do" />
                     <KanBanBlock StatusTasks={ProgressTask} status="InProgress" text="In Progress" />
                     <KanBanBlock StatusTasks={CompletedTask} status="Completed" text="Completed" />

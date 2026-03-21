@@ -10,11 +10,13 @@ export default function KanBanBlock({StatusTasks , status , text }){
     })
 
     return(
-        <div className='bg-white rounded-lg shadow-md border-1 border-gray-300 '>
-            <p className="h-10 bg-slate-200 flex justify-center items-center border-b-1 border-gray-300 rounded-t-lg text-stone-800">{text}</p>
+        <div className='bg-white dark:bg-[#262626] rounded-lg shadow-md border border-gray-300 dark:border-[#3a3a3a] min-w-[300px] lg:w-full dark:shadow-black/10'>
+            <p className="h-10 bg-slate-200 dark:bg-[#454545] flex justify-center items-center border-b border-gray-300 dark:border-[#3a3a3a] rounded-t-lg text-stone-800 dark:text-[#b4b4b4] font-semibold">
+                {text}
+            </p>
             <div 
                 ref={setNodeRef}
-                className={`h-full w-full p-3 overflow-auto flex flex-col gap-3 ${isOver ? "bg-gray-200" : '' }`}
+                className={`h-full w-full p-3 overflow-auto flex flex-col gap-3 ${isOver ? "bg-gray-200 dark:bg-gray-900" : '' }`}
             >
                 <SortableContext 
                     items={StatusTasks.map(task =>task.task_id)}

@@ -1,7 +1,7 @@
 export default function StatusBlock({status , text}){
     return (
         <div
-            className={`flex h-7  px-3 rounded-full gap-2 justify-start items-center shadow-md 
+            className={`flex h-7  px-3 rounded-full gap-2 justify-start items-center shadow-md dark:shadow-sm
                 ${status === 'toDo' ? "w-20 shadow-stone-200 bg-stone-200" : ''}
                 ${status === 'InProgress' ? "w-30 shadow-yellow-200 bg-yellow-200" : ''}
                 ${status === 'Completed' ? "w-30 shadow-green-200 bg-green-200" : ''}`

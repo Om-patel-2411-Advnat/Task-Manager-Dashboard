@@ -7,9 +7,9 @@ export default function Tasks({ tasks }) {
     const { ToDoTask, ProgressTask, CompletedTask } = useTasks(tasks);
 
     return (
-        <div className="w-full h-auto shadow-lg flex flex-col bg-white rounded-xl">
-            <div className="h-15 p-5 border-b-1 border-gray-300 flex justify-between items-center">
-                <p className="text-xl font-semibold text-stone-700">Recent Tasks</p>
+        <div className="w-full h-auto shadow-lg flex flex-col bg-white dark:bg-[#1f1f1f] dark:border dark:border-[#3a3a3a] rounded-xl pb-10 dark:shadow-black/30">
+            <div className="h-15 p-5 border-b-1 border-gray-300 dark:border-[#3a3a3a]  flex justify-between items-center">
+                <p className="text-xl font-semibold text-stone-700 dark:text-[#e5e5e5]">Recent Tasks</p>
                 <FilterSortButton />
             </div>
             <div>

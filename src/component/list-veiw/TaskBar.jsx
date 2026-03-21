@@ -36,8 +36,8 @@ export default function TaskBar({ task, status, text }) {
     }
 
     return (
-        <div className="w-full px-3 h-12 bg-white border-b border-gray-300 grid grid-cols-[2fr_1fr_1fr_1fr] items-center">
-            <div className="">
+        <div className="w-full px-3 h-12 bg-white dark:bg-[#2b2b2b] border-b border-gray-300 dark:border-[#3a3a3a] grid grid-cols-[2fr_1fr_1fr_1fr] items-center">
+            <div className="dark:text-[#e5e5e5]">
                 <p className="">{task.title}</p>
             </div>
             <div className="">
@@ -47,7 +47,7 @@ export default function TaskBar({ task, status, text }) {
                 <PriorityBlock priority={task.priority} />
             </div>
             <div className="flex justify-between">
-                <p className="text-stone-500 font-serif">
+                <p className="text-stone-500 font-serif dark:text-[#a3a3a3]">
                     {new Date(task.dueDate).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric',
@@ -56,21 +56,22 @@ export default function TaskBar({ task, status, text }) {
                 </p>
                 <div className="relative mr-5">
                     <p
-                        className="text-stone-700"
+                        className="text-stone-700 dark:text-[#bdbdbd] hover:text-black dark:hover:text-white cursor-pointer"
                         onClick={() => setIsOpen(!IsOpen)}
                     >
                         <FontAwesomeIcon icon={faEllipsisVertical} />
                     </p>
-                    {IsOpen && <div className="absolute right-0 bg-white text-stone-800 flex border-1 border-gray-300 rounded-md z-10">
+                    {IsOpen && <div className="absolute right-0 bg-white dark:bg-[#2f2f2f] text-stone-800 dark:text-[#e5e5e5] flex border-1 border-gray-300 
+                        dark:border-[#3a3a3a] rounded-md z-10 shadow-md dark:shadow-black/30">
                         <button
                             onClick={HandleEditTask}
-                            className="py-1 px-2 border-r-1 border-gray-300"
+                            className="py-1 px-2 border-r-1 border-gray-300 dark:border-[#3a3a3a] hover:bg-gray-100 dark:hover:bg-[#3a3a3a]"
                         >
                             <FontAwesomeIcon icon={faPenToSquare} />
                         </button>
                         <button
-                            onClick={HandleDeleteTask}
-                            className="py-1 px-2"
+                            onClick={HandleDeleteTask}  
+                            className="py-1 px-2 hover:bg-gray-100 dark:hover:bg-[#3a3a3a]"
                         >
                             <FontAwesomeIcon icon={faTrashCan} />
                         </button>

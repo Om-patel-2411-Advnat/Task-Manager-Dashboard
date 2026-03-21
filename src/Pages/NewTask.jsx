@@ -60,7 +60,7 @@ export default function NewTask(){
 
     return (
         <Modal path="task">
-            <div className="h-120 w-100 bg-white rounded-lg shadow-xl p-4">
+            <div className="h-120 w-100 bg-white dark:bg-[#262626] rounded-lg shadow-xl p-4">
                 <TaskForm onCreateNewTask={HandleNewTask} HandleClose={HandleClose} task={task}/>
             </div>
         </Modal>

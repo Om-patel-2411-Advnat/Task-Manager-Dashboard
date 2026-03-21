@@ -1,7 +1,7 @@
 import { createPortal } from "react-dom"
 import { useNavigate } from "react-router-dom"
 
-export default function Modal({children , path}){
+export default function Modal({ children, path}){
 
     const navigate = useNavigate();
 

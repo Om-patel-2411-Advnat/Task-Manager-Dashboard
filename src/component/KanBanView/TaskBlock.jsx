@@ -61,13 +61,13 @@ export default function TaskBlock({task , status , text}){
             ref={setNodeRef}
             {...attributes}
             style={style}
-            className="w-full rounded-lg shadow-md border-1 bg-white border-gray-300 flex flex-col justify-between p-3"
+            className="w-full rounded-lg shadow-md dark:shadow-black/30 border bg-white dark:bg-[#2b2b2b] border-gray-300 dark:border-[#3a3a3a] flex flex-col justify-between p-3"
         >
             <div className="flex flex-col gap-2">
                 <div className="flex justify-between">
                     <p 
                         {...listeners}
-                        className="text-lg font-semibold text-stone-700"
+                        className="text-lg font-semibold text-stone-700 dark:text-[#e5e5e5]"
                     >
                         {task.title}
                     </p>
@@ -77,17 +77,18 @@ export default function TaskBlock({task , status , text}){
                                 e.stopPropagation();
                                 setIsOpen(!IsOpen);
                             }}
-                            className="text-stone-700"
+                            className="text-stone-700 dark:text-[#bdbdbd] hover:text-black dark:hover:text-white"
                         >
                             <FontAwesomeIcon icon={faEllipsisVertical} />
                         </p>
-                        {IsOpen && <div className="absolute right-0 bg-white text-stone-800 flex border-1 border-gray-300 rounded-md">
+                        {IsOpen && <div className="absolute right-0 bg-white dark:bg-[#2f2f2f] text-stone-800 dark:text-[#e5e5e5] flex border border-gray-300 
+                        dark:border-[#3a3a3a] rounded-md shadow-md dark:shadow-black/30">
                             <button 
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     HandleEditTask();
                                 }}
-                                className="py-1 px-2 border-r-1 border-gray-300"
+                                className="py-1 px-2 border-r border-gray-300 dark:border-[#3a3a3a] hover:bg-gray-100 dark:hover:bg-[#3a3a3a]"
                             >
                                 <FontAwesomeIcon icon={faPenToSquare} />
                             </button>
@@ -96,7 +97,7 @@ export default function TaskBlock({task , status , text}){
                                     e.stopPropagation();
                                     HandleDeleteTask();
                                 }}
-                                className="py-1 px-2"
+                                className="py-1 px-2 hover:bg-gray-100 dark:hover:bg-[#3a3a3a]"
                             >
                                 <FontAwesomeIcon icon={faTrashCan} />
                             </button>
@@ -106,7 +107,7 @@ export default function TaskBlock({task , status , text}){
                 <StatusBlock status={status} text={text}/>
             </div>
             <div className="flex justify-between items-center mt-2">
-                <p className={` text-md ${isOverDue ? 'text-rose-400' : 'text-stone-500' }`}>
+                <p className={` text-md ${isOverDue ? 'text-rose-400 dark:text-rose-300' : 'text-stone-500 dark:dark:text-[#a3a3a3]' }`}>
                     { formattedDate }      
                 </p>
                 <PriorityBlock priority={task.priority}/>

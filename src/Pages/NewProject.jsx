@@ -48,7 +48,7 @@ export default function NewProject(){
 
     return (
         <Modal>
-            <div className="h-90 w-100 bg-white rounded-lg shadow-xl p-4">
+            <div className="h-90 w-100 bg-white dark:bg-[#262626] rounded-lg shadow-xl p-4">
                 <ProjectForm HandleSubmit={HandleNewProject} HandleClose={HandleClose} project={project}/>
             </div>
         </Modal>

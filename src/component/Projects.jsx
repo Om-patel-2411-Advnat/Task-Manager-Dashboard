@@ -35,22 +35,23 @@ export default function Projects(){
                     to={`${project.project_id}`} 
                     key={project.project_id} 
                     className={({isActive}) =>
-                        `group h-10  rounded-md mx-3 text-stone-700 flex items-center pl-3 ${isActive ? 'bg-stone-200' : 'hover:bg-stone-200' }`
+                        `group h-10  rounded-md mx-3 text-stone-700 dark:text-[#e5e5e5] flex items-center pl-3
+                        ${isActive ? 'bg-stone-200 dark:bg-[#3d3d3d]' : 'hover:bg-stone-200 dark:hover:bg-[#3d3d3d]' }`
                     }
                 >
                     <span>
                         {project.project_name}
                     </span>
-                    <div className="ml-auto pr-2 flex gap-2 text-stone-500 opacity-0 group-hover:opacity-100 transition ">
+                    <div className="ml-auto pr-2 flex gap-2 text-stone-500 dark:text-[#b7b7b7] opacity-0 group-hover:opacity-100 transition ">
                         <button
                             onClick={(e) => HandleEditProject(e, project.project_id)}
-                            className="hover:text-stone-700"
+                            className="hover:text-stone-700 dark:hover:text-[#e5e5e5]"
                         >
                             <FontAwesomeIcon icon={faPenToSquare} />
                         </button>
                         <button
                             onClick={(e) => HandleRemoveProject(project.project_id , e)}
-                            className="hover:text-stone-700"
+                            className="hover:text-stone-700 dark:hover:text-[#e5e5e5]"
                         >   
                             <FontAwesomeIcon icon={faTrashCan} />
                         </button>
