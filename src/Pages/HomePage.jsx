@@ -15,7 +15,7 @@ export default function HomePage() {
     }
 
     return (
-        <div className="bg-[#fcf8f8] dark:bg-[#1f1f1f] flex h-screen w-full">
+        <div className="bg-[#fcf8f8] dark:bg-[#1f1f1f] flex h-screen w-full overflow-x-auto">
             <SideBar isOpen={isSideBarOpen}/> 
             {isSideBarOpen && (
                 <div

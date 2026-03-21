@@ -49,7 +49,7 @@ export default function KanBan({ tasks }) {
     }
 
     return (
-        <div className="w-full h-full shadow-lg flex flex-col bg-white dark:bg-[#1f1f1f] dark:border dark:border-[#3a3a3a] dark:shadow-black/30 rounded-xl p-3 overflow-y-hidden">
+        <div className="w-full h-full shadow-lg flex flex-col bg-white dark:bg-[#1f1f1f] dark:border dark:border-[#3a3a3a] dark:shadow-black/30 rounded-xl p-3 overflow-y-hidden overflow-x-auto flex-1 scroll-auto">
             <div className="h-15 p-5 flex justify-between items-center">
                 <p className="text-xl font-semibold text-stone-700 dark:text-[#e5e5e5]">Recent Tasks</p>
                 <FilterSortButton />

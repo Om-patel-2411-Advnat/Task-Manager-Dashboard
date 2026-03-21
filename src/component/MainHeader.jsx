@@ -18,7 +18,7 @@ export default function MainHeader({ setSideBarOpen }){
     },[input , dispatch]);
 
     return(
-        <header className="h-16 w-full flex  items-center px-2 bg-[#fcf8f8] dark:bg-[#1f1f1f] border-b-1 border-gray-300 dark:border-gray-500 gap-5">
+        <header className="h-16 w-full flex items-center px-2 bg-[#fcf8f8] dark:bg-[#1f1f1f] border-b border-gray-300 dark:border-gray-500 gap-5">
             <div 
                 onClick={()=> setSideBarOpen(prev => !prev )}
                 className="h-full w-10 flex justify-center items-center lg:hidden relative"
