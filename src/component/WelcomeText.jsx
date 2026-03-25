@@ -13,8 +13,8 @@ export default function WelcomeText({ text , path }){
                 <p className="text-2xl md:text-3xl font-medium h-13 w-auto flex items-center dark:text-stone-100 text-stone-800">Welcome back, Om! 👋</p>
                 <p className="text-stone-500 hidden lg:flex">Here what's happening with your projects today. </p>
             </div>
-            <div className="flex w-full flex-col sm:flex-row justify-center items-center gap-5">
-                <div className="h-10  text-stone-800 flex  border border-gray-300 dark:border-[#3a3a3a] rounded-md">
+            <div className="flex w-full lg:w-auto flex-col sm:flex-row justify-center items-center gap-5">
+                <div className="h-10 text-stone-800 flex  border border-gray-300 dark:border-[#3a3a3a] rounded-md">
                     <button 
                         onClick={() => dispatch(SwitchActions.SetView("list"))}
                         className={`border-r w-20 border-gray-300 dark:border-[#3a3a3a] px-5 rounded-l-md ${view === 'list' ? 'bg-stone-200 text-shadow-md' : 'dark:text-stone-200' }`}

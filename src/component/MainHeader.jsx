@@ -25,7 +25,7 @@ export default function MainHeader({ setSideBarOpen }){
             >
                 <p className="text-xl"><FontAwesomeIcon icon={faBars} /></p>
             </div>
-            <div className="h-12 w-full flex justify-center items-center mr-3">
+            <div className="h-12 w-full flex items-center mr-3">
                 <input 
                     value={input}
                     onChange={(e)=>setInput(e.target.value)}
