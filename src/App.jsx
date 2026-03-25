@@ -1,4 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import LoginPage from "./Pages/LoginPage";
 import HomePage from "./Pages/HomePage";
@@ -6,8 +8,7 @@ import Dashboard from "./Pages/DashBoard";
 import NewProject from "./Pages/NewProject";
 import NewTask from "./Pages/NewTask";
 import ProjectDetails from "./Pages/ProjectDetails";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import SignUpPage from "./Pages/SignUpPage.jsx";
 
 function App() {
 
@@ -25,6 +26,10 @@ function App() {
     {
       path: '/login',
       element: <LoginPage />,
+    },
+    {
+      path : '/signup',
+      element : <SignUpPage />
     },
     {
       path: '/',

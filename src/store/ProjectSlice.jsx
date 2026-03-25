@@ -11,7 +11,7 @@ const ProjectSlice = createSlice({
     reducers : {
         addProject(state , action){
             state.projects.push(action.payload);
-            localStorage.setItem("projects" , JSON.stringify(state.projects))
+            localStorage.setItem("projects" , JSON.stringify(state.projects));
         },
         removeProject(state , action){
             state.projects = state.projects.filter(project => project.project_id !== action.payload);

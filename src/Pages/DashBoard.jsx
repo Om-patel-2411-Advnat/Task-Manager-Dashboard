@@ -6,9 +6,13 @@ import KanBan from "../component/KanBanView/KanBan";
 export default function Dashboard() {
 
     const isAuth = useSelector(state => state.auth.isAuthenticated);
-    const projects = useSelector(state => state.projects.projects );
-    const allTasks = projects.flatMap(project => project.tasks);
+    const currentUser = useSelector(state => state.auth.currentUser);
+    const AllProjects = useSelector(state => state.projects.projects );
     const view = useSelector(state => state.view.view);
+
+    const projects = AllProjects.filter(project => project.user_id === currentUser.user_id);
+
+    const allTasks = projects.flatMap(project => project.tasks);
 
     if (!isAuth) {
         return <Navigate to='/login' />

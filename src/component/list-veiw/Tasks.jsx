@@ -12,16 +12,14 @@ export default function Tasks({ tasks }) {
                 <p className="text-xl font-semibold text-stone-700 dark:text-[#e5e5e5]">Recent Tasks</p>
                 <FilterSortButton />
             </div>
-            <div className="h-full flex flex-col overflow-x-auto">
-                <div className="h-full w-full">
-                    <TaskStatusView StatusTasks={ToDoTask} status="toDo" text="To do"/>
-                </div>
-                <div className="h-full w-full ">
-                    <TaskStatusView StatusTasks={ProgressTask} status="InProgress" text="In Progress"/>
-                </div>
-                <div className="h-full w-full">
-                    <TaskStatusView StatusTasks={CompletedTask} status="Completed" text="Completed"/>
-                </div>
+            <div>
+                <TaskStatusView StatusTasks={ToDoTask} status="toDo" text="To do"/>
+            </div>
+            <div >
+                <TaskStatusView StatusTasks={ProgressTask} status="InProgress" text="In Progress"/>
+            </div>
+            <div>
+                <TaskStatusView StatusTasks={CompletedTask} status="Completed" text="Completed"/>
             </div>
         </div>
     )

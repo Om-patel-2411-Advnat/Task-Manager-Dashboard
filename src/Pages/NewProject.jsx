@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 export default function NewProject(){
 
     const isAuth = useSelector(state => state.auth.isAuthenticated);
+    const user = useSelector(state => state.auth.currentUser);
     const location = useLocation();
     const project = location.state?.project ;
     const dispatch = useDispatch();
@@ -32,6 +33,7 @@ export default function NewProject(){
             }))
         }else{
             const NewProject = {
+                user_id : user.user_id ,
                 project_id: Date.now(),
                 project_name: data.title,
                 description : data.description ,

@@ -9,7 +9,10 @@ export default function Projects(){
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const projects = useSelector(state => state.projects.projects);
+    const AllProjects = useSelector(state => state.projects.projects);
+    const currentUser = useSelector(state => state.auth.currentUser);
+
+    const projects = AllProjects.filter(project => project.user_id === currentUser.user_id);
 
     function HandleRemoveProject(id , e){
 
@@ -17,8 +20,6 @@ export default function Projects(){
         e.stopPropagation();
 
         dispatch(projectActions.removeProject(id));
-        
-        console.log(projects);
     }
     function HandleEditProject(e , id){
         e.preventDefault();
