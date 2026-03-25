@@ -18,19 +18,19 @@ export default function MainHeader({ setSideBarOpen }){
     },[input , dispatch]);
 
     return(
-        <header className="h-16 w-full flex items-center px-2 bg-[#fcf8f8] dark:bg-[#1f1f1f] border-b border-gray-300 dark:border-gray-500 gap-5">
+        <header className="h-16 flex items-center px-2 bg-[#fcf8f8] dark:bg-[#1f1f1f] border-b border-gray-300 dark:border-gray-500 gap-5">
             <div 
                 onClick={()=> setSideBarOpen(prev => !prev )}
                 className="h-full w-10 flex justify-center items-center lg:hidden relative"
             >
                 <p className="text-xl"><FontAwesomeIcon icon={faBars} /></p>
             </div>
-            <div className="h-12 flex justify-center items-center mr-3">
+            <div className="h-12 w-full flex justify-center items-center mr-3">
                 <input 
                     value={input}
                     onChange={(e)=>setInput(e.target.value)}
                     type="text" 
-                    className="h-full w-200 bg-gray-200 dark:bg-gray-600 dark:hover:bg-gray-500 hover:bg-gray-300 rounded-lg outline-none px-3 text-lg" 
+                    className="h-full max-w-200 w-full bg-gray-200 dark:bg-gray-600 dark:hover:bg-gray-500 hover:bg-gray-300 rounded-lg outline-none px-3 text-lg" 
                     placeholder="Search your task" 
                 />
             </div>

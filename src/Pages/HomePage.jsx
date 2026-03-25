@@ -23,7 +23,7 @@ export default function HomePage() {
                     className="fixed inset-0 bg-black dark:bg-white opacity-30 z-40 lg:hidden"
                 />
             )}
-            <div className="flex flex-col flex-1"> 
+            <div className="flex w-full flex-col flex-1"> 
                 <MainHeader setSideBarOpen={setSideBarOpen}/>
                 <div className="flex-1 p-4 overflow-y-auto bg-slate-100/80 dark:bg-transparent">
                     <Outlet />
